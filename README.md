@@ -29,7 +29,7 @@ This configuration may create chargeable (non-free) resources in your AWS accoun
 - Install Terraform.
 - Clone this repo, or download the code to your local workstation.
 - Open (or extract) the ***src*** folder.
-- Fill-in the above **prerequisites** in the ***terraform.tfvars*** file.
+- Fill-in the above **prerequisites** in the ***terraform.tfvars*** file (customize more of the details in there if so desired).
 - Go to the ***src*** folder.
 - Run the following commands in a terminal in the ***src*** location:
     ```bash
@@ -53,8 +53,8 @@ This configuration may create chargeable (non-free) resources in your AWS accoun
 ## Defaults
 
 - Region: us-east-1
-- VPC CIDR: 10.169.0.0/26
-- EC2 Subnet CIDR (public): 10.169.0.0/27
+- Availability Zone: us-east-1a
+- CIDR range: 10.169.0.0/27
 
 ## Outputs
 
