@@ -25,7 +25,8 @@ provider "aws" {
 }
 
 module "vpc" {
-  source = "./ec2_vpc"
+  source    = "./ec2_vpc"
+  subnet_az = var.ec2.subnet_az
 }
 module "ssh" {
   source           = "./ec2_security_group"
@@ -47,19 +48,20 @@ module "rdp" {
 }
 module "ec2" {
   source          = "./ec2_instance"
+  user_data       = var.ec2.user_data
   public_key      = var.ec2.public_key
+  key_pair_name   = var.ec2.key_pair_name
   ami             = var.ec2.ami
   subnet          = module.vpc.subnet_id
   security_groups = [module.ssh.security_group_id, module.rdp.security_group_id]
-  user_data       = var.ec2.user_data
 }
 
-output "ssh_connect_if_linux" {
-  value = "ssh -i ${var.ec2.private_key_path} ec2-user@${module.ec2.public_dns}"
-}
-output "get_Administrator_password_if_windows" {
-  value = "aws ec2 get-password-data --instance-id ${element(split("/", module.ec2.instance_arn), 1)} --priv-launch-key ${var.ec2.private_key_path} --profile ${var.ec2.aws_cli_profile}"
-}
 output "public_hoatname" {
   value = module.ec2.public_dns
+}
+output "ssh_connect_if_linux" {
+  value = "ssh -i <private/key/path> ec2-user@${module.ec2.public_dns}"
+}
+output "get_Administrator_password_if_windowse" {
+  value = "aws ec2 get-password-data --instance-id ${element(split("/", module.ec2.instance_arn), 1)} --priv-launch-key <private/key/path> [--profile <aws-cli-profile>]"
 }
