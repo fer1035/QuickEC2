@@ -15,10 +15,10 @@ rdp = {
 }
 
 ec2 = {
-  ami              = "<REGIONAL-AMI-ID>"
-  aws_cli_profile  = "default"
-  region           = "us-east-1"
-  private_key_path = "<PRIVATE-KEY-PATH>"
-  public_key       = "<PUBLIC-KEY-CONTENT>"
-  user_data        = null
+  user_data     = null
+  public_key    = null
+  key_pair_name = null
+  region        = "us-east-1"
+  subnet_az     = "us-east-1a"
+  ami           = "<REGIONAL-AMI-ID>"
 }

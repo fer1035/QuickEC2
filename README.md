@@ -2,53 +2,60 @@
 
 Build your own single-use, disposable Virtual Machine in the Cloud!  
 
-The code was written for local Terraform use to create a quick AWS EC2 Instance for testing purposes along with the necessary VPC, Subnets, and Security Groups.
+The code was written for local Terraform use to create a quick AWS EC2 Instance for testing purposes along with the necessary VPC, Subnet, and Security Groups.
 
 ## Caveat Emptor
 
-This configuration may create chargeable (non-free) resources in your AWS account especially if you change the defaults such as the EC2 instance size, so make sure that you understand this before deploying the infrastructure.
+- This configuration may create chargeable (non-free) resources in your AWS account especially if you change the defaults such as the EC2 instance size, so make sure that you understand this before deploying the infrastructure.
+- The resulting infrastructure is meant **for quick testing purposes only**, and **not for production use**.
 
 ## Prerequisites
 
-- EC2 Instance infrastructure
-    - A suitable AMI ID
-    - Key pair
-        - Private key: local PEM file
-        - Public key: key material
-- Software and configuration
-    - Terraform
-    - AWS account
-        - IAM user with sufficient privileges
-            - Access Key ID
-            - Secret Access Key
-    - AWS CLI
-        - Aws default profile configured using the Access Key credentials above
+- AWS account
+- AWS IAM user with sufficient privileges
+    - Access Key ID
+    - Secret Access Key
+- A suitable AMI ID (AMI is regional)
+- A local Terraform installation
 
 ## Steps
 
-- Install Terraform.
-- Clone this repo, or download the code to your local workstation.
-- Open (or extract) the ***src*** folder.
-- Fill-in the above **prerequisites** in the ***terraform.tfvars*** file (customize more of the details in there if so desired).
-- Go to the ***src*** folder.
-- Run the following commands in a terminal in the ***src*** location:
-    ```bash
-    terraform init
-    terraform plan -out "QuickEC2.plan"
-    terraform apply "QuickEC2.plan"
-    ```
-- Once you're done with the Instance, destroy the infrastructure:
-    ```bash
-    terraform destroy
-    ```
-- Answer ***yes*** when prompted.
+- Before
+    - Install Terraform.
+    - Clone this repo, or download the code to your local workstation.
+    - Open (or extract) the ***src*** folder.
+    - Fill-in the above **prerequisites** in the ***terraform.tfvars*** file (customize more of the details in there if so desired).
+    - Go to the ***src*** folder.
+    - Run the following commands in a terminal in the ***src*** location:
+        ```bash
+        terraform init
+        terraform plan -out "QuickEC2.plan"
+        terraform apply "QuickEC2.plan"
+        ```
+- After
+    - Once you're done with the Instance, destroy the infrastructure:
+        ```bash
+        terraform destroy
+        ```
+    - Answer ***yes*** when prompted.
 
 ## Allowed Connections
 
-- AWS Instance Connect
+- EC2 Instance Connect
 - AWS Session Manager
-- SSH for Linux
-- RDP for Windows
+- SSH for Linux (requires Key Pair configuration)
+- RDP for Windows (requires Key Pair and AWSCLI configuration)
+
+## About The Key Pair
+
+There are several options available here for the Key Pair usage.
+
+- Without Key Pair
+    - You can connect to the EC@ Instance through the browser using EC2 Instance Connect or AWS Session Manager. In this case, you can leave both the ***public_key*** and ***key_pair_name*** parameters as ***null***.
+- Key Pair created in AWS
+    - If you have created a Key Pair in the AWS EC2 console and you want to use it here, you will just need to specify ***key_pair_name*** as it appears in the console.
+- Your own Key Pair
+    - If you have created your own public-private Key Pair and you want to use it here, you will just need to specify ***public_key***, which is the public key material / content.
 
 ## Defaults
 

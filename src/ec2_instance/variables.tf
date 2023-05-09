@@ -30,7 +30,14 @@ EOF
 
 variable "public_key" {
   type        = string
+  default     = null
   description = "SSH public key material to attach to the instance."
+}
+
+variable "key_pair_name" {
+  type        = string
+  default     = null
+  description = "Existing SSH public key name to attach to the instance."
 }
 
 variable "managed_policy_arns" {
