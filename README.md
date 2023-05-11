@@ -2,7 +2,7 @@
 
 Build your own single-use, disposable Virtual Machine in the Cloud!  
 
-The code was written for local Terraform use to create a quick AWS EC2 Instance for testing purposes along with the necessary VPC, Subnet, and Security Groups.
+The code was written for local Terraform use to create a quick AWS EC2 Instance for testing purposes along with the necessary VPC, Subnet, and Security Groups. More about [AWS EC2](https://docs.aws.amazon.com/ec2/).
 
 ## Caveat Emptor
 
@@ -11,17 +11,16 @@ The code was written for local Terraform use to create a quick AWS EC2 Instance 
 
 ## Prerequisites
 
-- AWS account
-- AWS IAM user with sufficient privileges
+- [AWS account](https://aws.amazon.com/)
+- AWS [IAM user](https://us-east-1.console.aws.amazon.com/iamv2/) with sufficient privileges
     - Access Key ID
     - Secret Access Key
 - A suitable AMI ID (AMI is regional)
-- A local Terraform installation
+- A local Terraform [installation](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 
 ## Steps
 
 - Before
-    - Install Terraform.
     - Clone this repo, or download the code to your local workstation.
     - Open (or extract) the ***src*** folder.
     - Fill-in the above **prerequisites** in the ***terraform.tfvars*** file (customize more of the details in there if so desired).
@@ -39,7 +38,7 @@ The code was written for local Terraform use to create a quick AWS EC2 Instance 
         ```
     - Answer ***yes*** when prompted.
 
-## Allowed Connections
+## Allowed Connection Methods
 
 - EC2 Instance Connect
 - AWS Session Manager
