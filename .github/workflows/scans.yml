@@ -1,0 +1,26 @@
+name: scans
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**/README.md'
+      - '**/LICENSE'
+      - 'images/**'
+
+jobs:
+
+  tfsec-dev:
+    name: tfsec
+    uses: ./.github/workflows/tfsec.yml
+    with:
+      ENVIRONMENT: pull-request
+      TARGET_PATH: src
+  terraform-dev:
+    name: terraform
+    uses: ./.github/workflows/terraform_validate.yml
+    with:
+      ENVIRONMENT: pull-request
+      TERRAFORM_VERSION: '1.4.6'
+      TARGET_PATH: src
+    secrets:
+      TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}

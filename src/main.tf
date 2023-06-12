@@ -56,6 +56,9 @@ module "ec2" {
   security_groups = [module.ssh.security_group_id, module.rdp.security_group_id]
 }
 
+output "instance_id" {
+  value = element(split("/", module.ec2.instance_arn), 1)
+}
 output "public_hostname" {
   value = module.ec2.public_dns
 }
