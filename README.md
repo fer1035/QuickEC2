@@ -60,8 +60,8 @@ There are several options available here for the Key Pair usage.
 
 ## Defaults
 
-- Region: us-east-1
-- Availability Zone: us-east-1a
+- Region: ap-southeast-1
+- Availability Zone: ap-southeast-1a
 - CIDR range: 10.169.0.0/27
 
 ## Outputs
