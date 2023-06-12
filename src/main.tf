@@ -12,7 +12,7 @@ variable "ssh" {}
 variable "rdp" {}
 variable "ec2" {}
 provider "aws" {
-  region     = var.ec2.region
+  region = var.ec2.region
   default_tags {
     tags = {
       Name = "QuickEC2"
@@ -28,7 +28,6 @@ module "vpc" {
 }
 #tfsec:ignore:aws-ec2-no-public-ingress-sgr
 #tfsec:ignore:aws-ec2-no-public-egress-sgr
-#tfsec:ignore:aws-ec2-no-public-egress-sgr
 #tfsec:ignore:aws-ec2-add-description-to-security-group-rule
 module "ssh" {
   source           = "./ec2_security_group"
@@ -39,6 +38,9 @@ module "ssh" {
   sg_description   = var.ssh.sg_description
   vpc_id           = module.vpc.vpc_id
 }
+#tfsec:ignore:aws-ec2-no-public-ingress-sgr
+#tfsec:ignore:aws-ec2-no-public-egress-sgr
+#tfsec:ignore:aws-ec2-add-description-to-security-group-rule
 module "rdp" {
   source           = "./ec2_security_group"
   ingress_from     = var.rdp.ingress_from
