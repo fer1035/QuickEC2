@@ -66,6 +66,7 @@ There are several options available here for the Key Pair usage.
 
 ## Outputs
 
+- EC2 Instance ID
 - EC2 Instance hostname
 - SSH command for connection if it's a Linux Instance
 - AWS CLI command to obtain the automatically-generated Administrator password for RDP connection if it's a Windows Instance
