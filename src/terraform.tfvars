@@ -18,7 +18,7 @@ ec2 = {
   user_data     = null
   public_key    = null
   key_pair_name = null
-  region        = "us-east-1"
-  subnet_az     = "us-east-1a"
-  ami           = "<REGIONAL-AMI-ID>"
+  region        = "ap-southeast-1"
+  subnet_az     = "ap-southeast-1a"
+  ami           = "ami-067d12e172891a3e4"
 }
