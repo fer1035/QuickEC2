@@ -56,12 +56,12 @@ module "ec2" {
   security_groups = [module.ssh.security_group_id, module.rdp.security_group_id]
 }
 
-output "public_hoatname" {
+output "public_hostname" {
   value = module.ec2.public_dns
 }
 output "ssh_connect_if_linux" {
   value = "ssh -i <private/key/path> ec2-user@${module.ec2.public_dns}"
 }
-output "get_Administrator_password_if_windowse" {
+output "get_Administrator_password_if_windows" {
   value = "aws ec2 get-password-data --instance-id ${element(split("/", module.ec2.instance_arn), 1)} --priv-launch-key <private/key/path> [--profile <aws-cli-profile>]"
 }
