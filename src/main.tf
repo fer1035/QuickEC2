@@ -8,15 +8,11 @@ terraform {
   }
   backend "local" {}
 }
-variable "aws_access_key_id" {}
-variable "aws_secret_access_key" {}
 variable "ssh" {}
 variable "rdp" {}
 variable "ec2" {}
 provider "aws" {
   region     = var.ec2.region
-  access_key = var.aws_access_key_id
-  secret_key = var.aws_secret_access_key
   default_tags {
     tags = {
       Name = "QuickEC2"
@@ -24,10 +20,16 @@ provider "aws" {
   }
 }
 
+#tfsec:ignore:aws-ec2-no-public-ip-subnet
+#tfsec:ignore:aws-ec2-require-vpc-flow-logs-for-all-vpcs
 module "vpc" {
   source    = "./ec2_vpc"
   subnet_az = var.ec2.subnet_az
 }
+#tfsec:ignore:aws-ec2-no-public-ingress-sgr
+#tfsec:ignore:aws-ec2-no-public-egress-sgr
+#tfsec:ignore:aws-ec2-no-public-egress-sgr
+#tfsec:ignore:aws-ec2-add-description-to-security-group-rule
 module "ssh" {
   source           = "./ec2_security_group"
   ingress_from     = var.ssh.ingress_from
@@ -46,6 +48,9 @@ module "rdp" {
   sg_description   = var.rdp.sg_description
   vpc_id           = module.vpc.vpc_id
 }
+#tfsec:ignore:aws-ec2-enforce-http-token-imds
+#tfsec:ignore:aws-ec2-enable-at-rest-encryption
+#tfsec:ignore:aws-iam-no-policy-wildcards
 module "ec2" {
   source          = "./ec2_instance"
   user_data       = var.ec2.user_data

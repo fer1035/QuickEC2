@@ -27,6 +27,8 @@ The code was written for local Terraform use to create a quick AWS EC2 Instance 
     - Go to the ***src*** folder.
     - Run the following commands in a terminal in the ***src*** location:
         ```bash
+        export AWS_ACCESS_KEY_ID="<your AWS Access Key ID>"
+        export AWS_SECRET_ACCESS_KEY="<your AWS Secret Access Key>"
         terraform init
         terraform plan -out "QuickEC2.plan"
         terraform apply "QuickEC2.plan"
