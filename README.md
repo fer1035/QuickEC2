@@ -62,6 +62,7 @@ There are several options available here for the Key Pair usage.
 
 - Region: ap-southeast-1
 - Availability Zone: ap-southeast-1a
+- AMI: Amazon Linux 2023
 - CIDR range: 10.169.0.0/27
 
 ## Outputs
